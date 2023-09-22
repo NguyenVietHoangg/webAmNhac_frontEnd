@@ -1,0 +1,96 @@
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import './App.css'
+
+import { EffectCoverflow, Pagination, Navigation } from 'swiper';
+import SliderWrapper from "./_SlickSliderStyle";
+
+function App() {
+    return (
+        <div className="container">
+            <Swiper
+                effect={'coverflow'}
+                grabCursor={true}
+                centeredSlides={true}
+                loop={true}
+                slidesPerView={'auto'}
+                coverflowEffect={{
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 2.5,
+                }}
+                pagination={{ el: '.swiper-pagination', clickable: true }}
+                navigation={{
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                    clickable: true,
+                }}
+                modules={[EffectCoverflow, Pagination, Navigation]}
+                className="swiper_container"
+            >
+                <SwiperSlide>
+                    <SwiperSlide>
+                        <img src="https://avatar-ex-swe.nixcdn.com/slideshow/2023/09/18/c/0/9/a/1695041007228_org.jpg" alt="slide_image" />
+
+                    </SwiperSlide>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <SwiperSlide>
+                        <img src="https://avatar-ex-swe.nixcdn.com/slideshow/2023/09/19/8/6/6/8/1695127540683_org.jpg" alt="slide_image" />
+
+                    </SwiperSlide>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <SwiperSlide>
+                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
+
+                    </SwiperSlide>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <SwiperSlide>
+                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
+
+                    </SwiperSlide>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <SwiperSlide>
+                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
+
+                    </SwiperSlide>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <SwiperSlide>
+                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
+
+                    </SwiperSlide>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <SwiperSlide>
+                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
+
+                    </SwiperSlide>
+                </SwiperSlide>
+                <SliderWrapper>
+
+                    <div className="slider-controler">
+                        {/* <div className="swiper-button-prev slider-arrow">
+                            <ion-icon name="arrow-back-outline"></ion-icon>
+                        </div>
+                        <div className="swiper-button-next slider-arrow">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </div> */}
+                        <div className="swiper-pagination"></div>
+                    </div>
+                </SliderWrapper>
+            </Swiper>
+        </div>
+    );
+}
+
+export default App;

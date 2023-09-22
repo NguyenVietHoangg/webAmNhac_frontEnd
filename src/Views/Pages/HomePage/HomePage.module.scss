@@ -1,0 +1,23 @@
+.container {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    margin-top: 80px;
+
+    .Sliders {
+        width: 100%;
+        align-items: center;
+        display: flex;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .conten {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}
