@@ -42,10 +42,11 @@ function App() {
                 </SwiperSlide>
                 <SwiperSlide>
                     <SwiperSlide>
-                        <img src="https://avatar-ex-swe.nixcdn.com/slideshow/2023/09/19/8/6/6/8/1695127540683_org.jpg" alt="slide_image" />
+                        <img src="https://avatar-ex-swe.nixcdn.com/slideshow/2023/09/21/7/f/f/2/1695299978742_org.jpg" alt="slide_image" />
 
                     </SwiperSlide>
                 </SwiperSlide>
+
                 <SwiperSlide>
                     <SwiperSlide>
                         <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
@@ -54,28 +55,17 @@ function App() {
                 </SwiperSlide>
                 <SwiperSlide>
                     <SwiperSlide>
-                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
+                        <img src="https://avatar-ex-swe.nixcdn.com/slideshow/2023/09/22/d/4/4/3/1695391071805_org.jpg" alt="slide_image" />
 
                     </SwiperSlide>
                 </SwiperSlide>
                 <SwiperSlide>
                     <SwiperSlide>
-                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
+                        <img src="https://avatar-ex-swe.nixcdn.com/slideshow/2023/09/21/7/f/f/2/1695306812031_org.jpg" alt="slide_image" />
 
                     </SwiperSlide>
                 </SwiperSlide>
-                <SwiperSlide>
-                    <SwiperSlide>
-                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
 
-                    </SwiperSlide>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <SwiperSlide>
-                        <img src="http://2.bp.blogspot.com/-yNFb_4CDX2I/UZCLpmW0_QI/AAAAAAAAIjU/fLDk70peB0c/s1600/hinh-anh-song-bien-1.jpg" alt="slide_image" />
-
-                    </SwiperSlide>
-                </SwiperSlide>
                 <SliderWrapper>
 
                     <div className="slider-controler">
@@ -89,7 +79,7 @@ function App() {
                     </div>
                 </SliderWrapper>
             </Swiper>
-        </div>
+        </div >
     );
 }
 

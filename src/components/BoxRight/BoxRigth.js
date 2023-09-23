@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
+// import { CallPostApi } from '../../CallApis/CallApis'
+import Cookies from 'js-cookie';
+import { Call_Post_Api } from '../../CallApis/CallApis';
+import { Link, useNavigate } from "react-router-dom"
 
 function BoxRigth() {
+
+    const [apis, setApi] = useState([])
+
+    useEffect(() => {
+
+        const token = Cookies.get('accessToken');
+        const id = Cookies.get('id');
+        const cleanedJwtString = token.replace(/^"|"$/g, '');
+        const cleanId = id.replace(/^"|"$/g, '');
+
+        Call_Post_Api(
+            null, cleanedJwtString, cleanId, '/music/getMusic'
+        ).then((data) => {
+            setApi(data.metadata)
+        })
+
+    }, [])
+
     return (
         <div style={{
             paddingLeft: '40px'
@@ -11,9 +33,9 @@ function BoxRigth() {
                 BXH Bài Hát
             </div>
             <ButtonGroup variant="contained">
-                <Button color="primary">Button 1</Button>
-                <Button color="primary">Button 2</Button>
-                <Button color="primary">Button 3</Button>
+                <Button color="primary">Việt Nam</Button>
+                <Button >Châu Âu</Button>
+                <Button >Button 3</Button>
             </ButtonGroup>
 
             <div style={{
@@ -57,35 +79,47 @@ function BoxRigth() {
                 </div>
 
             </div>
-            <div style={{
-                fontSize: '14px',
-                display: 'flex',
-                flexDirection: 'row',
-                padding: '10px',
-                borderBottom: '0.4px solid #D9D9D9',
-            }}>
-                <div style={{
-                    textAlign: 'center',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '6px',
-                    marginRight: '10px',
-                    fontSize: '20px'
+            {apis.map((api, index) => (
+                <Link to={`/Detail/${api._id}`} style={{
+                    textDecoration: 'none',
                 }}>
-                    1
-                </div>
-                <div>
-                    <div>
-                        Khi Cơn Mưa Dần Phai
-                    </div>
                     <div style={{
-                        opacity: 0.6
+                        fontSize: '14px',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        padding: '10px',
+                        borderBottom: '0.4px solid #D9D9D9',
+                        color: 'black'
                     }}>
-                        ngô xuân quy
+                        <div style={{
+                            textAlign: 'center',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: '6px',
+                            marginRight: '10px',
+                            fontSize: '20px',
+                            textDecoration: 'none',
+                            listStyle: 'none'
+                        }}>
+                            {index + 1}
+                        </div>
+                        <div>
+                            <div>
+                                {api.music_name}
+                            </div>
+                            <div style={{
+                                opacity: 0.6
+                            }}>
+                                {api.name || <>
+                                    Ngô Xuân Quy
+                                </>}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </Link>
 
+            ))
+            }
             <div style={{
                 fontSize: '14px',
                 display: 'flex',
@@ -471,7 +505,7 @@ function BoxRigth() {
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
 

@@ -5,7 +5,7 @@ import styles from './LoadMusic.module.scss';
 import axios from 'axios'
 import { Call_Post_Api } from '../../../CallApis/CallApis';
 import Cookies from 'js-cookie';
-import { Spin } from 'antd';
+import { Spin, Modal } from 'antd';
 // Define a custom function to get base64 data
 const getBase64 = (img, callback) => {
     const reader = new FileReader();
@@ -24,33 +24,33 @@ function LoadMusic() {
     const [imageUrl, setImageUrl] = useState('');
     const [soures, setSoures] = useState('');
 
-    const uploadProps = {
-        name: 'file',
-        action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
-        headers: {
-            authorization: 'authorization-text',
-        },
-        maxFileSize: 1050 * 1024 * 1024, // Corrected typo in property name
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-                getBase64(info.file.originFileObj, (url) => {
-                    setFileValue(url);
-                    console.log(url)
+    // const uploadProps = {
+    //     name: 'file',
+    //     action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
+    //     headers: {
+    //         authorization: 'authorization-text',
+    //     },
+    //     maxFileSize: 1050 * 1024 * 1024, // Corrected typo in property name
+    //     onChange(info) {
+    //         if (info.file.status !== 'uploading') {
+    //             console.log(info.file, info.fileList);
+    //         }
+    //         if (info.file.status === 'done') {
+    //             message.success(`${info.file.name} file uploaded successfully`);
+    //             getBase64(info.file.originFileObj, (url) => {
+    //                 setFileValue(url);
+    //                 console.log(url)
 
-                })
-            } else if (info.file.status === 'error') {
-                getBase64(info.file.originFileObj, (url) => {
-                    setFileValue(url);
-                    console.log(url)
-                })
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
-    };
+    //             })
+    //         } else if (info.file.status === 'error') {
+    //             getBase64(info.file.originFileObj, (url) => {
+    //                 setFileValue(url);
+    //                 console.log(url)
+    //             })
+    //             message.error(`${info.file.name} file upload failed.`);
+    //         }
+    //     },
+    // };
 
 
     const handleFileInputChange = (event) => {
@@ -68,23 +68,51 @@ function LoadMusic() {
 
     console.log(fileValue)
 
-    const handleChange = (info) => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-            return;
-        }
-        if (info.file.status === 'done') {
-            // Get the URL of the uploaded image from the response
-            getBase64(info.file.originFileObj, (url) => {
-                setImageUrl(url);
+    // const handleChange = (info) => {
+    //     if (info.file.status === 'uploading') {
+    //         setLoading(true);
+    //         return;
+    //     }
+    //     if (info.file.status === 'done') {
+    //         // Get the URL of the uploaded image from the response
+    //         getBase64(info.file.originFileObj, (url) => {
+    //             setImageUrl(url);
+    //             console.log({ url })
 
-            })
+    //         })
 
-            setLoading(false);
+    //         setLoading(false);
 
+    //     }
+    // };
+
+    console.log({ imageUrl })
+
+
+    //test
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [previewImage, setPreviewImage] = useState('');
+    const [fileList, setFileList] = useState([]);
+    const [previewOpen, setPreviewOpen] = useState(false);
+    const handleCancel = () => setPreviewOpen(false);
+
+    const handlePreview = async (file) => {
+        if (file.url) {
+            setPreviewImage(file.url);
+            setPreviewVisible(true);
         }
     };
 
+    const handleChange = ({ fileList }) => {
+        setFileList(fileList);
+    };
+
+    const uploadButton = (
+        <div>
+            <PlusOutlined />
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+    );
 
     const beforeUpload = (file) => {
         const allowedTypes = ['image/jpeg', 'image/png'];
@@ -106,6 +134,7 @@ function LoadMusic() {
 
     //upda ảnh trên cloudinmary
 
+
     const uploadImage = async () => {
         // setIsLoading(true)
 
@@ -120,7 +149,7 @@ function LoadMusic() {
         formData.append("upload_preset", PRESET_NAME)
         formData.append("folder", FOLDER_NAME)
 
-        formData.append('file', imageUrl)
+        formData.append('file', fileList[0].thumbUrl)
 
         const res = await axios.post(api, formData, {
             headers: {
@@ -131,12 +160,12 @@ function LoadMusic() {
         return res.data.secure_url;
     }
 
-    const uploadButton = (
-        <div>
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
-            <div style={{ marginTop: 8 }}>Upload</div>
-        </div>
-    );
+    // const uploadButton = (
+    //     <div>
+    //         {loading ? <LoadingOutlined /> : <PlusOutlined />}
+    //         <div style={{ marginTop: 8 }}>Upload</div>
+    //     </div>
+    // );
 
     const uploadMP3 = async () => {
         const CLOUD_NAME = "dvqmndx5j"; // Replace with your Cloudinary cloud name
@@ -185,8 +214,11 @@ function LoadMusic() {
         }
     };
 
+
+
     //khai tạo name
     const [name, setName] = useState('');
+    const [tacgia, setTacgia] = useState('');
     const [theLoai, setTheLoai] = useState('');
 
     const [isLoad, setIsLoad] = useState(false)
@@ -204,7 +236,7 @@ function LoadMusic() {
             console.log({ name })
 
 
-            if (imageUrl !== "" && fileValue !== "" && name !== "" && theLoai !== "") {
+            if (fileList !== "" && fileValue !== "" && name !== "" && theLoai !== "") {
                 const audioUrl = await uploadMP3();
                 const url = await uploadImage()
 
@@ -213,7 +245,9 @@ function LoadMusic() {
                     music_name: name,
                     music_genre: theLoai,
                     img: url,
-                    url: audioUrl
+                    url: audioUrl,
+                    tacgia: tacgia,
+                    user_id: cleanId
                 },
                     cleanedJwtString, cleanId,
                     '/music/createMusic'
@@ -237,6 +271,8 @@ function LoadMusic() {
         }
     };
 
+
+    console.log(fileList)
 
     return (
         <div>
@@ -318,6 +354,22 @@ function LoadMusic() {
                             marginBottom: '20px'
                         }}>
                             <div>
+                                Tác giả
+                            </div>
+                            <div style={{
+                                width: '300px',
+                                marginLeft: '50px'
+                            }}>
+                                <Input onChange={(e) => setTacgia(e.target.value)} />
+                            </div>
+                        </div>
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            fontSize: '18px',
+                            marginBottom: '20px'
+                        }}>
+                            <div>
                                 Thể Loại
                             </div>
                             <div style={{
@@ -365,16 +417,17 @@ function LoadMusic() {
                                 marginLeft: '80px'
                             }}>
                                 <Upload
-                                    name="avatar"
-                                    listType="picture-card"
-                                    className="avatar-uploader"
-                                    showUploadList={false}
                                     action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-                                    beforeUpload={beforeUpload}// Prevent default upload
+                                    listType="picture-circle"
+                                    fileList={fileList}
+                                    onPreview={handlePreview}
                                     onChange={handleChange}
                                 >
-                                    {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                                    {fileList.length >= 8 ? null : uploadButton}
                                 </Upload>
+                                <Modal open={previewOpen} footer={null} onCancel={handleCancel}>
+                                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                                </Modal>
                             </div>
                         </div>
                         <Button type="primary" onClick={handleUpload}>Upload MP3</Button>

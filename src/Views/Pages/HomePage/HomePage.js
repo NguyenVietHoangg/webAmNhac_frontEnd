@@ -13,10 +13,10 @@ function HomePage() {
 
     const audioRef = useRef(null);
 
-    useEffect(() => {
-        // Sử dụng audioRef.current.play() để tự động phát âm thanh khi component được tải
-        audioRef.current.play();
-    }, []);
+    // useEffect(() => {
+    //     // Sử dụng audioRef.current.play() để tự động phát âm thanh khi component được tải
+    //     audioRef.current.play();
+    // }, []);
 
     const fileInputRef = useRef(null);
     const [uploadedImage, setUploadedImage] = useState(null);
@@ -31,8 +31,6 @@ function HomePage() {
 
         reader.readAsDataURL(file);
     };
-
-    console.log({ uploadedImage })
 
 
     const uploadImage = async () => {
@@ -626,7 +624,7 @@ function HomePage() {
                                     }}>
                                         Siu Back
                                     </div>
-                                </div>
+                                </div>conte
                             </div>
 
                             <div style={{
@@ -746,7 +744,7 @@ function HomePage() {
             </div >
 
 
-            {/* tải nhạc */}
+            {/* tải nhạc
 
             <div div >
                 <input
@@ -762,7 +760,7 @@ function HomePage() {
             </div>
             <Button onClick={() => handerUpload()}>
                 Upload
-            </Button>
+            </Button> */}
         </div >
     )
 }

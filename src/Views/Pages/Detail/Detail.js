@@ -1,34 +1,113 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Detail.module.scss';
 import NextPost from '../../../components/NextPost/NextPost';
 import Card from './../../../components/Cards/Card';
 import { Input, Upload, Button, message } from 'antd';
 import { EnterOutlined, MehOutlined, HeartOutlined, ArrowDownOutlined, ShareAltOutlined } from '@ant-design/icons'
+import { useParams } from 'react-router-dom';
+import { Call_Post_Api } from '../../../CallApis/CallApis';
+import Cookies from 'js-cookie';
 
 const cx = classNames.bind(styles);
 
 function Detail() {
     const audioRef = useRef(null);
 
-    // useEffect(() => {
-    //     const audioElement = audioRef.current;
+    const { id } = useParams();
 
-    //     // Sử dụng sự kiện "canplaythrough" để đảm bảo rằng audio đã sẵn sàng để phát
-    //     audioElement.addEventListener('canplaythrough', () => {
-    //         audioElement.play();
-    //     });
+    const [apis, setApi] = useState()
 
-    //     // Load audio
-    //     audioElement.load();
+    useEffect(() => {
+        Call_Post_Api(
+            null, null, null, '/music/getMusicById/' + id
+        )
+            .then((data) => {
+                setApi(data.metadata)
+            })
+    }, [])
 
-    //     // Làm sạch sự kiện khi unmounting
-    //     return () => {
-    //         audioElement.removeEventListener('canplaythrough', () => {
-    //             audioElement.play();
-    //         });
-    //     };
-    // }, []);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+
+    //xử lý yêu thihcs
+
+    const handerYeuThich = () => {
+
+        const token = Cookies.get('accessToken');
+        const name = Cookies.get('name');
+        const id = Cookies.get('id');
+        const cleanedJwtString = token.replace(/^"|"$/g, '');
+        const cleanId = id.replace(/^"|"$/g, '');
+        const cleanName = name.replace(/^"|"$/g, '');
+
+        Call_Post_Api(
+            {
+                music_name: apis.music_name,
+                music_genre: apis.music_genre,
+                music_img: apis.music_img,
+                music_url: apis.music_url,
+                user_id: cleanId,
+            }, cleanedJwtString, cleanId, "/yeuthich/createYeuThich"
+        ).then(() => {
+            message.success(`Đã thêm bài nhac vào yêu thích!!!`);
+
+        })
+    }
+
+    const [conten, setConten] = useState("")
+
+
+    const handleInputChange = (event) => {
+        // setState({ inputValue: event.target.value });
+        setConten(event.taget.value)
+    }
+
+
+    console.log({ conten })
+
+    const [comments, setComment] = useState([])
+
+    const getById = () => {
+        Call_Post_Api(
+            null, null, null, "/comment/getByIdCommnet/" + id
+        )
+            .then((data) => {
+                setComment(data.metadata)
+            })
+    }
+
+    useEffect(() => {
+        getById()
+    }, [])
+
+    const handleKeyPress = (event) => {
+
+        const token = Cookies.get('accessToken');
+        const name = Cookies.get('name');
+        const id = Cookies.get('id');
+        const cleanedJwtString = token.replace(/^"|"$/g, '');
+        const cleanId = id.replace(/^"|"$/g, '');
+        const cleanName = name.replace(/^"|"$/g, '');
+
+
+        if (event.key === 'Enter') {
+
+            Call_Post_Api(
+                {
+                    user_id: cleanId,
+                    music_id: apis._id,
+                    conten: conten,
+                    user_name: cleanName
+                },
+                cleanedJwtString, cleanId, "/comment/createComment"
+            )
+                .then(() => {
+                    getById()
+                })
+
+        }
+    }
 
     return (
         <div
@@ -49,20 +128,26 @@ function Detail() {
                     justifyContent: 'space-evenly'
                 }}
             >
+
                 <div style={{
                     width: '800px'
                 }}>
-                    <div>À Lôi - Double2T, Masew</div>
-                    <div style={{
-                        height: '100px'
-                    }}>
-                        <audio controls ref={audioRef}>
-                            <source
-                                type="audio/mpeg"
-                                src="http://res.cloudinary.com/dvqmndx5j/video/upload/v1695225431/banhang/wslnbjfcorch9borewta.mp3"
-                            />
-                        </audio>
-                    </div>
+                    {apis && (
+                        <>
+                            <div>{apis?.music_name}</div>
+                            <div style={{
+                                height: '100px'
+                            }}>
+
+                                <audio controls ref={audioRef} autoPlay>
+                                    <source
+                                        type="audio/mpeg"
+                                        src={apis?.music_url}
+                                    />
+                                </audio>
+                            </div>
+                        </>
+                    )}
 
                     <div style={{
                         marginTop: '60px',
@@ -77,7 +162,7 @@ function Detail() {
                                 marginRight: '20px'
                             }}>
                                 <HeartOutlined />
-                                <span className={cx('hover')}>
+                                <span className={cx('hover')} onClick={() => handerYeuThich()}>
                                     Yêu Thích
                                 </span>
                             </div>
@@ -129,7 +214,10 @@ function Detail() {
                             <div style={{
                                 flex: 1
                             }}>
-                                <Input />
+                                <Input
+                                    onChange={(e) => setConten(e.target.value)}
+                                    onKeyPress={handleKeyPress}
+                                />
                             </div>
                             <div style={{
                                 // flex: 0.5
@@ -146,9 +234,55 @@ function Detail() {
                     </div>
 
                     {/* conten bình luận */}
+                    {comments.map(comment => (
+                        <div style={{
+                        }}>
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                borderBottom: '0.5px solid gray',
 
+                            }}>
+                                <div style={{
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    padding: '10px'
+                                }}>
+                                    <MehOutlined />
+                                    <div style={{
+                                        marginLeft: '10px'
+                                    }}>
+                                        <div style={{
+                                            fontSize: '18px'
+                                        }}>
+                                            {comment.user_name}
+                                        </div>
+                                        <div style={{
+                                            fontSize: '12px'
+                                        }}>
+                                            {comment.conten}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={{
+                                    fontSize: '12px',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <div style={{
+                                        textAlign: 'center'
+                                    }}>
+                                        {comment.updatedAt}
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    ))}
                     <div style={{
-                        marginTop: '30px'
+                        // marginTop: '30px'
                     }}>
                         <div style={{
                             display: 'flex',
