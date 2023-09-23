@@ -162,8 +162,8 @@ function HomePage() {
 
         const token = Cookies.get('accessToken');
         const id = Cookies.get('id');
-        const cleanedJwtString = token.replace(/^"|"$/g, '');
-        const cleanId = id.replace(/^"|"$/g, '');
+        const cleanedJwtString = token?.replace(/^"|"$/g, '');
+        const cleanId = id?.replace(/^"|"$/g, '');
 
         Call_Post_Api(
             null, cleanedJwtString, cleanId, '/music/getMusic'

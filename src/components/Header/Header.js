@@ -296,9 +296,9 @@ const Header = () => {
         const token = Cookies.get('accessToken');
         const name = Cookies.get('name');
         const id = Cookies.get('id');
-        const cleanedJwtString = token.replace(/^"|"$/g, '');
-        const cleanId = id.replace(/^"|"$/g, '');
-        const cleanName = name.replace(/^"|"$/g, '');
+        const cleanedJwtString = token?.replace(/^"|"$/g, '');
+        const cleanId = id?.replace(/^"|"$/g, '');
+        const cleanName = name?.replace(/^"|"$/g, '');
 
 
         setToken(cleanedJwtString)

@@ -37,9 +37,9 @@ function Detail() {
         const token = Cookies.get('accessToken');
         const name = Cookies.get('name');
         const id = Cookies.get('id');
-        const cleanedJwtString = token.replace(/^"|"$/g, '');
-        const cleanId = id.replace(/^"|"$/g, '');
-        const cleanName = name.replace(/^"|"$/g, '');
+        const cleanedJwtString = token?.replace(/^"|"$/g, '');
+        const cleanId = id?.replace(/^"|"$/g, '');
+        const cleanName = name?.replace(/^"|"$/g, '');
 
         Call_Post_Api(
             {
@@ -86,25 +86,30 @@ function Detail() {
         const token = Cookies.get('accessToken');
         const name = Cookies.get('name');
         const id = Cookies.get('id');
-        const cleanedJwtString = token.replace(/^"|"$/g, '');
-        const cleanId = id.replace(/^"|"$/g, '');
-        const cleanName = name.replace(/^"|"$/g, '');
+        const cleanedJwtString = token?.replace(/^"|"$/g, '');
+        const cleanId = id?.replace(/^"|"$/g, '');
+        const cleanName = name?.replace(/^"|"$/g, '');
 
 
         if (event.key === 'Enter') {
 
-            Call_Post_Api(
-                {
-                    user_id: cleanId,
-                    music_id: apis._id,
-                    conten: conten,
-                    user_name: cleanName
-                },
-                cleanedJwtString, cleanId, "/comment/createComment"
-            )
-                .then(() => {
-                    getById()
-                })
+            if (token != "") {
+                Call_Post_Api(
+                    {
+                        user_id: cleanId,
+                        music_id: apis._id,
+                        conten: conten,
+                        user_name: cleanName
+                    },
+                    cleanedJwtString, cleanId, "/comment/createComment"
+                )
+                    .then(() => {
+                        getById()
+                    })
+            }
+            else {
+                alert('Bạn hay đăng nhập để bình luận!!!')
+            }
 
         }
     }
