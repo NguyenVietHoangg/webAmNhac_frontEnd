@@ -7,6 +7,9 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import axios from 'axios'
 import BoxRigth from '../../../components/BoxRight/BoxRigth'
+import Cookies from 'js-cookie';
+import { Call_Post_Api } from '../../../CallApis/CallApis'
+import { Link, useNavigate } from "react-router-dom"
 
 const cx = classNames.bind(styles)
 function HomePage() {
@@ -152,6 +155,26 @@ function HomePage() {
             });
     }
 
+
+    const [apis, setApi] = useState([])
+
+    useEffect(() => {
+
+        const token = Cookies.get('accessToken');
+        const id = Cookies.get('id');
+        const cleanedJwtString = token.replace(/^"|"$/g, '');
+        const cleanId = id.replace(/^"|"$/g, '');
+
+        Call_Post_Api(
+            null, cleanedJwtString, cleanId, '/music/getMusic'
+        ).then((data) => {
+            setApi(data.metadata)
+        })
+
+    }, [])
+
+    console.log({ apis })
+
     return (
         <div className={cx('container')}>
             <div>
@@ -172,35 +195,40 @@ function HomePage() {
                     </div>
                     <div style={{
                         display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
                         width: '100%',
-                        padding: 10
+                        // padding: 10
                     }}>
                         <div style={{
-                            marginLeft: '10px'
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            display: 'flex',
+                            width: '100%',
                         }}>
-                            <Card />
-                        </div>
-                        <div style={{
-                            marginLeft: '10px'
-                        }}>
-                            <Card />
-                        </div>
-                        <div style={{
-                            marginLeft: '10px'
-                        }}>
-                            <Card />
-                        </div>
-                        <div style={{
-                            marginLeft: '10px'
-                        }}>
-                            <Card />
-                        </div>
-                        <div style={{
-                            marginLeft: '10px'
-                        }}>
-                            <Card />
+                            {apis.map(api => (
+                                <Link to={`/Detail/${api._id}`} >
+                                    <div style={{
+                                        width: '180px'
+                                    }}>
+                                        <div>
+                                            <button style={{
+                                                border: 'none'
+                                            }}>
+                                                <img src={api?.music_img}
+                                                    className={cx("img_card")}
+                                                    style={{
+                                                        width: '150px'
+                                                    }}
+                                                />
+                                                <div className={cx('text_card')} style={{
+                                                    fontSize: '14px'
+                                                }}>
+                                                    {api?.music_name}
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
                         </div>
                     </div>
 

@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Call_Post_Api = async (body, token, id, link_url) => {
-    const url = "http://localhost:3056/v1/api";
+    // const url = "http://localhost:3056/v1/api";
+    const url = process.env.REACT_APP_URL
     const API_KEY = process.env.REACT_APP_API_KEY;
 
-    console.log({ token })
+    console.log(process.env)
 
     try {
         if (body === null) {
