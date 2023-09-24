@@ -11,81 +11,85 @@ import { Call_Post_Api } from '../../../CallApis/CallApis';
 
 // const authProvider = new firebase.auth.FacebookAuthProvider();
 
+import { Spin } from 'antd';
+
 const cx = classNames.bind(styles);
 
 function Login() {
 
     const navigate = useNavigate();
 
+    const [isLoad, setIsLoad] = useState(false)
+
     // const URL = process.env.REACT_APP_URL;
     // // const URL = process.env.REACT_APP_URL
 
     // console.log(URL + '/login')
 
-    const [email, setEmail] = useState([])
-    const [matkhau, setMatKhau] = useState([])
+    const [email, setEmail] = useState()
+    const [matkhau, setMatKhau] = useState()
     const [apis, setApi] = useState([])
 
 
     function handerSubmit() {
 
-        Call_Post_Api(
-            {
-                email: email,
-                password: matkhau
-            },
-            null, null,
-            '/shop/login'
-        ).then((data) => {
-            console.log(data.metadata)
-            if (data.metadata.shop.verify == true) {
-                alert("Tài khoản đã đăng nhập ở 1 nơi khác!!!")
-            }
-            else if (data.metadata.msg !== 'Shop not registered') {
-                if (data.metadata.status == "Tài Khoản Bạn Đã Bị Khóa!!") {
-                    alert(data.metadata.status)
-                    return;
+        console.log({ email })
+        console.log({ matkhau })
+
+
+        if (email != "" && matkhau != "") {
+            setIsLoad(true)
+
+            Call_Post_Api(
+                {
+                    email: email,
+                    password: matkhau
+                },
+                null, null,
+                '/shop/login'
+            ).then((data) => {
+                // if (data.metadata.shop.verify == true) {
+                //     alert("Tài khoản đã đăng nhập ở 1 nơi khác!!!")
+                // }
+                if (data.metadata.msg !== 'Authentication error') {
+
+                    const token = data.metadata.tokens.accessToken
+                    const name = data.metadata.shop.email
+
+                    const secretKey = 'my-secret-key';
+
+                    Cookies.set('accessToken', JSON.stringify(token), { expires: 7 });
+                    Cookies.set('name', JSON.stringify(name), { expires: 7 });
+
+
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-api-key": process.env.REACT_APP_KEY,
+                        },
+                    };
+
+                    // fetch(URL + '/shop/update_verify/' + data.metadata.shop._id, requestOptions)
+
+                    Cookies.set('id', JSON.stringify(data.metadata.shop._id), { expires: 7 });
+                    Cookies.set('timeeexp', JSON.stringify(data.metadata.tokens.timeExp), { expires: 7 });
+                    setIsLoad(false)
+
+                    navigate('/')
+
                 }
-                const token = data.metadata.tokens.accessToken
-                const name = data.metadata.shop.email
+                else {
+                    alert("Sai mật khẩu hoặc tài khoản!!")
+                    setIsLoad(false)
 
-                const secretKey = 'my-secret-key';
+                }
 
-                Cookies.set('accessToken', JSON.stringify(token), { expires: 7 });
-                Cookies.set('name', JSON.stringify(name), { expires: 7 });
-
-
-                const requestOptions = {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-api-key": process.env.REACT_APP_KEY,
-                    },
-                };
-
-                fetch(URL + '/shop/update_verify/' + data.metadata.shop._id, requestOptions)
-
-
-                // console.log('aa')
-                Cookies.set('id', JSON.stringify(data.metadata.shop._id), { expires: 7 });
-                Cookies.set('timeeexp', JSON.stringify(data.metadata.tokens.timeExp), { expires: 7 });
-                navigate('/')
-                // window.location = "/";
-                // if (data.metadata.shop.roles[0] == "SHOP") {
-                //     // alert(data.metadata.status)
-                //     navigate('/')
-                // }
-                // else {
-                //     navigate('/api/admin')
-
-                // }
-                // navigate('/', { state: { data: data.metadata.shop.roles[0] } });
-            }
-            else {
-                alert("Sai mật khẩu hoặc tài khoản!!")
-            }
-
-        });
+            });
+        }
+        else {
+            alert("Vui lòng nhập đủ thông tin!!!")
+        }
 
     }
 
@@ -122,6 +126,24 @@ function Login() {
 
     return (
         <div className={cx('container')}>
+            {isLoad &&
+                <div style={{
+                    position: 'fixed',
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    width: '100%',
+                    height: '100vh',
+                    zIndex: 100,
+                    top: 0,
+                    top: 0,
+                    left: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+
+                }}>
+                    <Spin />
+                </div>
+            }
             <div>
                 <div className={cx('box')}>
                     <div className={cx('form')}>
@@ -170,7 +192,7 @@ function Login() {
                                         Mật Khẩu
                                     </div>
                                     <div>
-                                        <input className={cx('input')}
+                                        <input type="password" className={cx('input')}
                                             onChange={(e) => setMatKhau(e.target.value)}
 
                                         />

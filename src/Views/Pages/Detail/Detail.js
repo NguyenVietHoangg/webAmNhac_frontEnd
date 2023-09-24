@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Detail.module.scss';
 import NextPost from '../../../components/NextPost/NextPost';
 import Card from './../../../components/Cards/Card';
 import { Input, Upload, Button, message } from 'antd';
-import { EnterOutlined, MehOutlined, HeartOutlined, ArrowDownOutlined, ShareAltOutlined } from '@ant-design/icons'
+import { EnterOutlined, MehOutlined, HeartOutlined, ArrowDownOutlined, ShareAltOutlined, MoreOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router-dom';
 import { Call_Post_Api } from '../../../CallApis/CallApis';
 import Cookies from 'js-cookie';
+import { Divider, Modal, Popover, Segmented } from 'antd';
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +16,14 @@ function Detail() {
     const audioRef = useRef(null);
 
     const { id } = useParams();
+
+    const [showArrow, setShowArrow] = useState(true);
+    const [arrowAtCenter, setArrowAtCenter] = useState(false);
+
+    const mergedArrow = useMemo(() => {
+        if (arrowAtCenter) return { pointAtCenter: true };
+        return showArrow;
+    }, [showArrow, arrowAtCenter]);
 
     const [apis, setApi] = useState()
 
@@ -105,6 +114,8 @@ function Detail() {
                 )
                     .then(() => {
                         getById()
+                        setConten("")
+                        message.success("Bạn bình luận thành công!!!")
                     })
             }
             else {
@@ -113,6 +124,34 @@ function Detail() {
 
         }
     }
+
+    const text = <span></span>
+    const content = (
+        <div style={{
+            width: '100%',
+            fontSize: '16px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column'
+        }}>
+            <div style={{
+                borderBottom: '1px solid gray',
+                width: '80%',
+                textAlign: 'center',
+                opacity: 0.7,
+                padding: '5px'
+            }}>
+                Xóa
+            </div>
+            <div style={{
+                padding: '5px'
+
+            }}>
+                Sửa
+            </div>
+        </div>
+    )
 
     return (
         <div
@@ -143,13 +182,25 @@ function Detail() {
                             <div style={{
                                 height: '100px'
                             }}>
-
+                                <div style={{
+                                    position: 'absolute',
+                                }}>
+                                    <img src={apis?.music_img} style={{
+                                        width: '80px',
+                                        height: '80px',
+                                        padding: '0px',
+                                        marginLeft: '30px',
+                                        marginTop: '10px'
+                                    }} />
+                                </div>
                                 <audio controls ref={audioRef} autoPlay>
                                     <source
                                         type="audio/mpeg"
                                         src={apis?.music_url}
                                     />
+
                                 </audio>
+
                             </div>
                         </>
                     )}
@@ -222,6 +273,7 @@ function Detail() {
                                 <Input
                                     onChange={(e) => setConten(e.target.value)}
                                     onKeyPress={handleKeyPress}
+                                    value={conten}
                                 />
                             </div>
                             <div style={{
@@ -272,13 +324,24 @@ function Detail() {
                                 <div style={{
                                     fontSize: '12px',
                                     justifyContent: 'center',
-                                    alignItems: 'center'
+                                    alignItems: 'center',
+                                    marginTop: '30px',
+                                    display: 'flex'
                                 }}>
                                     <div style={{
                                         textAlign: 'center'
                                     }}>
                                         {comment.updatedAt}
                                     </div>
+                                    <Popover placement="topLeft" title={text} content={content} arrow={mergedArrow}>
+                                        <div style={{
+                                            fontSize: '20px',
+                                            marginLeft: '20px',
+
+                                        }}>
+                                            <MoreOutlined />
+                                        </div>
+                                    </Popover>
                                 </div>
 
                             </div>

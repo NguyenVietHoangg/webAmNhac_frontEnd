@@ -350,68 +350,6 @@ function BoxRigth() {
                     marginRight: '10px',
                     fontSize: '20px'
                 }}>
-                    8
-                </div>
-                <div>
-                    <div>
-                        Khi Cơn Mưa Dần Phai
-                    </div>
-                    <div style={{
-                        opacity: 0.6
-                    }}>
-                        ngô xuân quy
-                    </div>
-                </div>
-            </div>
-
-
-            <div style={{
-                fontSize: '14px',
-                display: 'flex',
-                flexDirection: 'row',
-                padding: '10px',
-                borderBottom: '0.4px solid #D9D9D9',
-
-            }}>
-                <div style={{
-                    textAlign: 'center',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '6px',
-                    marginRight: '10px',
-                    fontSize: '20px'
-                }}>
-                    9
-                </div>
-                <div>
-                    <div>
-                        Khi Cơn Mưa Dần Phai
-                    </div>
-                    <div style={{
-                        opacity: 0.6
-                    }}>
-                        ngô xuân quy
-                    </div>
-                </div>
-            </div>
-
-
-            <div style={{
-                fontSize: '14px',
-                display: 'flex',
-                flexDirection: 'row',
-                padding: '10px',
-                borderBottom: '0.4px solid #D9D9D9',
-
-            }}>
-                <div style={{
-                    textAlign: 'center',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: '6px',
-                    marginRight: '10px',
-                    fontSize: '20px'
-                }}>
                     10
                 </div>
                 <div>
