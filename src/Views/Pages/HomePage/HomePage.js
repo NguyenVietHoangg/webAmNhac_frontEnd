@@ -10,11 +10,20 @@ import BoxRigth from '../../../components/BoxRight/BoxRigth'
 import Cookies from 'js-cookie';
 import { Call_Post_Api } from '../../../CallApis/CallApis'
 import { Link, useNavigate } from "react-router-dom"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const cx = classNames.bind(styles)
 function HomePage() {
 
     const audioRef = useRef(null);
+
+    useEffect(() => {
+        // Khởi tạo "aos" trong hàm useEffect để đảm bảo nó hoạt động sau khi dự án đã render.
+        AOS.init({
+            duration: 1000, // Đặt thời gian mặc định cho các hiệu ứng
+        });
+    }, []);
 
     // useEffect(() => {
     //     // Sử dụng audioRef.current.play() để tự động phát âm thanh khi component được tải
@@ -282,30 +291,43 @@ function HomePage() {
                         justifyContent: 'space-between',
                         width: '100%',
                         padding: 10
-                    }}>
+                    }}
+                        data-aos="zoom-out"
+                    >
                         <div style={{
                             marginLeft: '10px'
-                        }}>
+                        }}
+                            data-aos="zoom-in-right"
+
+                        >
                             <Card />
                         </div>
                         <div style={{
                             marginLeft: '10px'
-                        }}>
+                        }}
+                            data-aos="zoom-out-up"
+                        >
                             <Card />
                         </div>
                         <div style={{
                             marginLeft: '10px'
-                        }}>
+                        }}
+                            data-aos="zoom-out-up"
+                        >
                             <Card />
                         </div>
                         <div style={{
                             marginLeft: '10px'
-                        }}>
+                        }}
+                            data-aos="zoom-out-up"
+                        >
                             <Card />
                         </div>
                         <div style={{
                             marginLeft: '10px'
-                        }}>
+                        }}
+                            data-aos="zoom-out-left"
+                        >
                             <Card />
                         </div>
                     </div>
@@ -322,10 +344,17 @@ function HomePage() {
                         justifyContent: 'space-between',
                         width: '100%',
                         padding: 10
-                    }}>
+                    }}
+                        data-aos="fade-up"
+                        data-aos-anchor-placement="bottom-bottom"
+
+                    >
                         <div style={{
                             marginLeft: '10px'
-                        }}>
+                        }}
+                        // data-aos="fade-up"
+                        // data-aos-anchor-placement="top-bottom"
+                        >
                             <Card />
                         </div>
                         <div style={{
@@ -364,8 +393,12 @@ function HomePage() {
                             }}>
                                 <div>
                                     <div style={{
-                                        position: 'relative'
-                                    }}>
+                                        position: 'relative',
+                                        cursor: 'pointer'
+
+                                    }}
+                                        data-aos="zoom-in-right"
+                                    >
                                         <div style={{
                                             position: 'absolute',
                                             color: 'white',
@@ -398,8 +431,12 @@ function HomePage() {
                                 </div>
                                 <div>
                                     <div style={{
-                                        position: 'relative'
-                                    }}>
+                                        position: 'relative',
+                                        cursor: 'pointer'
+                                    }}
+                                        data-aos="zoom-out-left"
+
+                                    >
                                         <div style={{
                                             position: 'absolute',
                                             color: 'white',
@@ -652,37 +689,6 @@ function HomePage() {
                                     }}>
                                         Siu Back
                                     </div>
-                                </div>conte
-                            </div>
-
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                borderTop: '1px solid #dddddd',
-                                paddingTop: '10px',
-                                marginTop: '5px'
-
-                            }}>
-                                <img src='https://phunugioi.com/wp-content/uploads/2020/03/hinh-nen-may-tinh-4k-de-thuong-scaled.jpg'
-                                    style={{
-                                        width: '70px',
-                                        height: '70px'
-                                    }}
-                                />
-                                <div style={{
-                                    padding: '10px'
-                                }}>
-                                    <div style={{
-                                        fontSize: '16px'
-                                    }}>
-                                        Vương
-                                    </div>
-                                    <div style={{
-                                        fontSize: '13px',
-                                        opacity: 0.5
-                                    }}>
-                                        Siu Back
-                                    </div>
                                 </div>
                             </div>
 
@@ -722,7 +728,40 @@ function HomePage() {
                                 flexDirection: 'row',
                                 borderTop: '1px solid #dddddd',
                                 paddingTop: '10px',
-                                marginTop: '5px'
+                                marginTop: '5px',
+
+                            }}>
+                                <img src='https://phunugioi.com/wp-content/uploads/2020/03/hinh-nen-may-tinh-4k-de-thuong-scaled.jpg'
+                                    style={{
+                                        width: '70px',
+                                        height: '70px'
+                                    }}
+                                />
+                                <div style={{
+                                    padding: '10px'
+                                }}>
+                                    <div style={{
+                                        fontSize: '16px'
+                                    }}>
+                                        Vương
+                                    </div>
+                                    <div style={{
+                                        fontSize: '13px',
+                                        opacity: 0.5
+                                    }}>
+                                        Siu Back
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                borderTop: '1px solid #dddddd',
+                                paddingTop: '10px',
+                                marginTop: '5px',
+                                marginBottom: '40px'
+
 
                             }}>
                                 <img src='https://phunugioi.com/wp-content/uploads/2020/03/hinh-nen-may-tinh-4k-de-thuong-scaled.jpg'
@@ -751,15 +790,6 @@ function HomePage() {
                     </div>
 
                 </div>
-
-
-
-
-
-
-                {/* baif hats */}
-
-
 
 
 

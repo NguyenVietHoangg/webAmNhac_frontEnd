@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Call_Post_Api } from '../../../CallApis/CallApis';
 import Cookies from 'js-cookie';
 import { Divider, Modal, Popover, Segmented } from 'antd';
+import { Spin } from 'antd';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +17,7 @@ function Detail() {
     const audioRef = useRef(null);
 
     const { id } = useParams();
+    const [isLoad, setIsLoad] = useState(false);
 
     const [showArrow, setShowArrow] = useState(true);
     const [arrowAtCenter, setArrowAtCenter] = useState(false);
@@ -49,19 +51,22 @@ function Detail() {
         const cleanedJwtString = token?.replace(/^"|"$/g, '');
         const cleanId = id?.replace(/^"|"$/g, '');
         const cleanName = name?.replace(/^"|"$/g, '');
+        if (token != "") {
+            Call_Post_Api(
+                {
+                    music_name: apis.music_name,
+                    music_genre: apis.music_genre,
+                    music_img: apis.music_img,
+                    music_url: apis.music_url,
+                    user_id: cleanId,
+                }, cleanedJwtString, cleanId, "/yeuthich/createYeuThich"
+            ).then(() => {
+                message.success(`Đã thêm bài nhac vào yêu thích!!!`);
 
-        Call_Post_Api(
-            {
-                music_name: apis.music_name,
-                music_genre: apis.music_genre,
-                music_img: apis.music_img,
-                music_url: apis.music_url,
-                user_id: cleanId,
-            }, cleanedJwtString, cleanId, "/yeuthich/createYeuThich"
-        ).then(() => {
-            message.success(`Đã thêm bài nhac vào yêu thích!!!`);
-
-        })
+            })
+        } else {
+            alert("Bạn Cần đăng nhập để yêu thích bài nhạc!!!")
+        }
     }
 
     const [conten, setConten] = useState("")
@@ -101,8 +106,8 @@ function Detail() {
 
 
         if (event.key === 'Enter') {
-
             if (token != "") {
+                setIsLoad(true)
                 Call_Post_Api(
                     {
                         user_id: cleanId,
@@ -115,6 +120,7 @@ function Detail() {
                     .then(() => {
                         getById()
                         setConten("")
+                        setIsLoad(false)
                         message.success("Bạn bình luận thành công!!!")
                     })
             }
@@ -164,6 +170,25 @@ function Detail() {
                 marginBottom: '100px'
             }}
         >
+
+            {isLoad &&
+                <div style={{
+                    position: 'fixed',
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    width: '100%',
+                    height: '100vh',
+                    zIndex: 100,
+                    top: 0,
+                    top: 0,
+                    left: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+
+                }}>
+                    <Spin />
+                </div>
+            }
             <div
                 style={{
                     width: '80%',

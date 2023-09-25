@@ -32,89 +32,99 @@ function Search() {
             }}>
                 <div>
                     <div>
-                        Search
+                        Search | <span style={{
+                            color: 'gray'
+                        }}>
+                            Bài Hát
+                        </span>
                     </div>
+
                     <div>
-                        Bài Hát
-                    </div>
-                    <div>
-                        {apis.map(api => (
-                            <Link to={`/Detail/${api._id}`} style={{
-                                color: 'black',
-                                textDecoration: 'none'
-                            }}>
-                                <div style={{
-                                    width: '700px',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    paddingTop: '20px',
-                                    justifyContent: 'space-between',
-                                    borderBottom: '1px solid gray',
-                                    paddingBottom: '10px'
-                                }}>
-                                    <div style={{
-                                        display: 'flex',
-                                        paddingTop: '20px'
+                        {
+                            apis != "" ?
+                                apis.map(api => (
+                                    <Link to={`/Detail/${api._id}`} style={{
+                                        color: 'black',
+                                        textDecoration: 'none'
                                     }}>
-                                        <div>
-                                            <img src={api.music_img}
-                                                style={{
-                                                    width: '100px',
-                                                    height: '100px'
-                                                }}
-                                            />
-                                        </div>
                                         <div style={{
-                                            fontSize: '18px',
-                                            marginLeft: '10px',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
+                                            width: '700px',
                                             display: 'flex',
-                                            flexDirection: 'column'
+                                            flexDirection: 'row',
+                                            paddingTop: '20px',
+                                            justifyContent: 'space-between',
+                                            borderBottom: '1px solid gray',
+                                            paddingBottom: '10px'
                                         }}>
-                                            <div>
-                                                {api.music_name}
+                                            <div style={{
+                                                display: 'flex',
+                                                paddingTop: '20px'
+                                            }}>
+                                                <div>
+                                                    <img src={api.music_img}
+                                                        style={{
+                                                            width: '100px',
+                                                            height: '100px'
+                                                        }}
+                                                    />
+                                                </div>
+                                                <div style={{
+                                                    fontSize: '18px',
+                                                    marginLeft: '10px',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    display: 'flex',
+                                                    flexDirection: 'column'
+                                                }}>
+                                                    <div>
+                                                        {api.music_name}
+                                                    </div>
+                                                    <div style={{
+                                                        fontSize: '14px'
+                                                    }}>
+                                                        Đang cập nhật
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div style={{
-                                                fontSize: '14px'
+                                                fontSize: '16px',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center'
                                             }}>
-                                                Đang cập nhật
+                                                <div>
+                                                    OFFICIAL
+                                                </div>
+                                                <div style={{
+                                                    marginLeft: '10px'
+                                                }}>
+                                                    SQ
+                                                </div>
+                                            </div>
+
+                                            <div style={{
+                                                fontSize: '16px',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center'
+                                            }}>
+                                                <div>
+                                                    Tim
+                                                </div>
+                                                <div>
+                                                    Share
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div style={{
-                                        fontSize: '16px',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}>
-                                        <div>
-                                            OFFICIAL
-                                        </div>
-                                        <div style={{
-                                            marginLeft: '10px'
-                                        }}>
-                                            SQ
-                                        </div>
-                                    </div>
 
-                                    <div style={{
-                                        fontSize: '16px',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center'
-                                    }}>
-                                        <div>
-                                            Tim
-                                        </div>
-                                        <div>
-                                            Share
-                                        </div>
-                                    </div>
+                                    </Link>
+                                ))
+                                : <div style={{
+                                    color: 'rgb(45, 170, 237)'
+                                }}>
+                                    Không tìm thấy bài hát 😒😒😒
                                 </div>
-
-                            </Link>
-                        ))}
+                        }
                     </div>
                 </div>
 

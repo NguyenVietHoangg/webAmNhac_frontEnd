@@ -380,10 +380,14 @@ function BoxRigth() {
                         fontSize: '20px',
                         color: 'white',
                         textAlign: 'center',
-                        marginTop: '50px'
 
                     }}>
-                        GIỢI Ý DÀNH CHO BẠN
+                        <div style={{
+                            marginTop: '50px'
+
+                        }}>
+                            GIỢI Ý DÀNH CHO BẠN
+                        </div>
                     </div>
                     <div style={{
                         fontSize: '16px',

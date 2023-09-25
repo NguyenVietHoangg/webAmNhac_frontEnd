@@ -86,8 +86,6 @@ function LoadMusic() {
     //     }
     // };
 
-    console.log({ imageUrl })
-
 
     //test
     const [previewVisible, setPreviewVisible] = useState(false);
@@ -272,7 +270,6 @@ function LoadMusic() {
     };
 
 
-    console.log(fileList)
 
     return (
         <div>

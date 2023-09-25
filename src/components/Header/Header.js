@@ -217,6 +217,7 @@ const Header = () => {
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
+            width: '100%'
         }}>
             <Link to="/UsesPage" >
                 <div style={{
@@ -230,7 +231,12 @@ const Header = () => {
                     Trang cá nhân
                 </div>
             </Link>
-            <Link to="/NhacCuaTui" >
+            <Link to="/NhacCuaTui" style={{
+                textDecoration: 'none',
+                color: 'black'
+            }}
+                className={cx('hover')}
+            >
 
                 <div style={{
                     borderBottom: '1px solid gray',
@@ -241,7 +247,7 @@ const Header = () => {
 
 
                 }}>
-                    Nhạc cửa tui
+                    Nhạc của tui
                 </div>
             </Link>
             <div style={{
@@ -249,7 +255,8 @@ const Header = () => {
                 lineHeight: '30px',
                 fontSize: '17px',
                 width: '150px',
-                height: '40px'
+                height: '40px',
+                cursor: 'pointer'
             }}>
                 Tài khoản
             </div>
@@ -258,7 +265,9 @@ const Header = () => {
                 lineHeight: '30px',
                 fontSize: '17px',
                 width: '150px',
-                height: '40px'
+                height: '40px',
+                cursor: 'pointer'
+
             }}>
                 Lịch sử
             </div>
@@ -267,7 +276,9 @@ const Header = () => {
                 lineHeight: '30px',
                 fontSize: '17px',
                 width: '150px',
-                height: '40px'
+                height: '40px',
+                cursor: 'pointer'
+
             }}
                 onClick={() => handelLoOut()}
             >
@@ -413,14 +424,16 @@ const Header = () => {
                             icon={faHome}
                             style={{
                                 fontSize: "20px",
-                                color: 'lightblue'
+                                color: 'rgb(45, 170, 237)'
                             }}
                         />
                     </div>
                     <div onClick={() => handelUpload()}>
                         <FontAwesomeIcon icon={faCloud}
                             style={{
-                                fontSize: "20px"
+                                fontSize: "20px",
+                                color: 'rgb(45, 170, 237)'
+
                             }}
                         />
                     </div>
@@ -429,12 +442,19 @@ const Header = () => {
                             token == "" ?
                                 <>
                                     <Button >
-                                        <Link to="/Login">
+                                        <Link to="/Login" style={{
+                                            textDecoration: 'none'
+                                        }}>
                                             Đăng nhập
                                         </Link>
                                     </Button>
                                     <Button color="private">
-                                        Đăng ký
+                                        <Link to="/SingUp" style={{
+                                            color: 'black',
+                                            textDecoration: 'none'
+                                        }}>
+                                            Đăng ký
+                                        </Link>
                                     </Button>
                                 </>
                                 :
