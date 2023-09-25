@@ -16,7 +16,7 @@ function Search() {
         ).then((data) => {
             setApi(data.metadata)
         })
-    }, [])
+    }, [keySearch])
 
     return (
         <div style={{
