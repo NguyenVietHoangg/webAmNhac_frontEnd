@@ -228,7 +228,13 @@ function LoadMusic() {
             const cleanedJwtString = token.replace(/^"|"$/g, '');
             const cleanId = id.replace(/^"|"$/g, '');
 
-            if (fileList[0].length != 0 && fileValue != undefined && name !== "" && theLoai !== "") {
+            console.log(fileList[0])
+
+
+            if (fileList[0]?.thumbUrl != undefined && fileValue != undefined && name != "" && theLoai != "") {
+
+                console.log("abc")
+
                 const audioUrl = await uploadMP3();
                 const url = await uploadImage()
 
@@ -251,6 +257,7 @@ function LoadMusic() {
                     setFileValue("")
                     setIsLoad(false)
                     message.success(`Tải nhạc thành công!!!`);
+
                 })
             } else {
                 setIsLoad(false)
@@ -399,10 +406,11 @@ function LoadMusic() {
                             display: 'flex',
                             flexDirection: 'row',
                             fontSize: '18px',
-                            marginBottom: '20px'
+                            marginBottom: '20px',
+                            marginLeft: '-1px',
                         }}>
                             <div>
-                                ảnh
+                                Ảnh
                             </div>
                             <div style={{
                                 marginLeft: '80px'
