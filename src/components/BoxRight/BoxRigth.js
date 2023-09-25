@@ -25,7 +25,6 @@ function BoxRigth() {
 
     }, [])
 
-    console.log({ apis })
 
     return (
         <div style={{

@@ -225,15 +225,13 @@ function LoadMusic() {
             setIsLoad(true)
             const token = Cookies.get('accessToken');
             const id = Cookies.get('id');
-            const cleanedJwtString = token.replace(/^"|"$/g, '');
-            const cleanId = id.replace(/^"|"$/g, '');
+            const cleanedJwtString = token?.replace(/^"|"$/g, '');
+            const cleanId = id?.replace(/^"|"$/g, '');
 
-            console.log(fileList[0])
 
 
             if (fileList[0]?.thumbUrl != undefined && fileValue != undefined && name != "" && theLoai != "") {
 
-                console.log("abc")
 
                 const audioUrl = await uploadMP3();
                 const url = await uploadImage()

@@ -5,8 +5,6 @@ const Call_Post_Api = async (body, token, id, link_url) => {
     const url = process.env.REACT_APP_URL
     const API_KEY = process.env.REACT_APP_API_KEY;
 
-    console.log(process.env)
-
     try {
         if (body === null) {
             body = {}; // Set a default value as an empty object {}
@@ -32,7 +30,6 @@ const Call_Post_Api = async (body, token, id, link_url) => {
         }
 
         const data = await response.json();
-        console.log({ data });
         return data;
     } catch (error) {
         console.error("API call failed:", error);

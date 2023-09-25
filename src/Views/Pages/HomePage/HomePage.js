@@ -60,8 +60,6 @@ function HomePage() {
 
         // formData.append('file', image)
 
-        console.log({ uploadedImage })
-
         // formData.append("file", {
         //     uri: uploadedImage,
         //     type: "audio/mpeg", // Set the correct content type for MP3 files
@@ -149,7 +147,7 @@ function HomePage() {
         uploadMP3()
             .then((audioUrl) => {
                 setSoures(audioUrl)
-                console.log("MP3 uploaded successfully. URL:", audioUrl);
+                // console.log("MP3 uploaded successfully. URL:", audioUrl);
             })
             .catch((error) => {
                 console.error("MP3 upload failed:", error);
@@ -174,7 +172,6 @@ function HomePage() {
 
     }, [])
 
-    console.log({ apis })
 
     return (
         <div className={cx('container')}>

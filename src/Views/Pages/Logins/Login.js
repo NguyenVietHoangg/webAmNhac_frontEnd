@@ -33,10 +33,6 @@ function Login() {
 
     function handerSubmit() {
 
-        console.log({ email })
-        console.log({ matkhau })
-
-
         if (email != "" && matkhau != "") {
             setIsLoad(true)
 

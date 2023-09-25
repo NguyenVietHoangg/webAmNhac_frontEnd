@@ -83,8 +83,6 @@ function Detail() {
     }
 
 
-    console.log({ conten })
-
     const [comments, setComment] = useState([])
 
     const getById = () => {

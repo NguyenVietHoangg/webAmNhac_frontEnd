@@ -327,7 +327,7 @@ const Header = () => {
 
     //xử lý load ảnh
     const handelUpload = () => {
-        if (token !== "") {
+        if (token != "") {
             navigate('/LoadMusic')
         }
         else {
@@ -446,8 +446,6 @@ const Header = () => {
                                 fontSize: "20px",
                                 color: 'rgb(45, 170, 237)',
                                 marginTop: '5px'
-
-
                             }}
                         />
                     </div>
