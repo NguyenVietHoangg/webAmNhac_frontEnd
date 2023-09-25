@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="container">
                 <div className={cx('box')}>
                     <div className={cx('row')}>
-                        <h1>Quy-Thành</h1>
+                        <h1>Nhóm G06</h1>
                         <p>Address: 60-49 Road 11378 New York</p>
                         <p>New York</p>
                         <p>Phone: +65 11.188.888</p>

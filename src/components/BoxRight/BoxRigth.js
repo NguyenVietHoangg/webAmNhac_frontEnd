@@ -112,7 +112,7 @@ function BoxRigth() {
                             <div style={{
                                 opacity: 0.6
                             }}>
-                                {api.name || <>
+                                {api.author || <>
                                     Ngô Xuân Quy
                                 </>}
                             </div>

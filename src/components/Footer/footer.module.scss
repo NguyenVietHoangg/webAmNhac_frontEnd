@@ -47,6 +47,7 @@
 
     .footer__widget table {
         border: none;
+        margin-left: 160px;
     }
 
     .footer__widget table tr td {
@@ -58,8 +59,7 @@
     .footer__widget table tr td ul li {
         list-style: none;
         border: none;
-
-
+        margin-left: 30px;
     }
 
     .footer__widget table tr td ul li a {
@@ -96,15 +96,15 @@
 
     .footer_right input {
         border: 1px solid #ededed;
-        width: 60%;
-        height: 46px;
+        width: 50%;
+        height: 40px;
     }
 
     .footer_right button {
-        width: 40%;
-        height: 46px;
+        width: 50%;
+        height: 40px;
         position: relative;
-        top: 3px;
+        top: 0px;
         background-color: #7fad39;
         color: #ffffff;
         border: none;
@@ -129,6 +129,8 @@
         border-radius: 100px;
         padding: 10px;
         margin-left: 20px;
+        font-size: 18px;
+
 
         &:hover {
             background-color: #e5dbdb;

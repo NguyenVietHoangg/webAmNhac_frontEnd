@@ -10,7 +10,8 @@ import { Call_Post_Api } from '../../../CallApis/CallApis';
 import Cookies from 'js-cookie';
 import { Divider, Modal, Popover, Segmented } from 'antd';
 import { Spin } from 'antd';
-
+import Lottie from "lottie-react";
+import listen from "../../../access/animation_lmz2pi2d.json"
 const cx = classNames.bind(styles);
 
 function Detail() {
@@ -28,6 +29,10 @@ function Detail() {
     }, [showArrow, arrowAtCenter]);
 
     const [apis, setApi] = useState()
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     useEffect(() => {
         Call_Post_Api(
@@ -170,7 +175,6 @@ function Detail() {
                 marginBottom: '100px'
             }}
         >
-
             {isLoad &&
                 <div style={{
                     position: 'fixed',
@@ -299,6 +303,11 @@ function Detail() {
                                     onChange={(e) => setConten(e.target.value)}
                                     onKeyPress={handleKeyPress}
                                     value={conten}
+                                    style={{
+                                        border: 'none',
+                                        borderBottom: '1px solid gray',
+                                        backgroundColor: 'none'
+                                    }}
                                 />
                             </div>
                             <div style={{
@@ -307,10 +316,9 @@ function Detail() {
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                height: '30px',
-                                marginTop: '10px'
+                                height: '20px',
                             }}>
-                                <EnterOutlined />
+                                <Lottie animationData={listen} />
                             </div>
                         </div>
                     </div>

@@ -188,7 +188,6 @@ function HomePage() {
             <div className={cx("conten")}>
                 <div style={{
                     fontSize: "25px",
-                    marginLeft: "0px",
 
                 }}>
                     <div>
@@ -198,6 +197,8 @@ function HomePage() {
                         display: 'flex',
                         width: '100%',
                         // padding: 10
+                        marginLeft: "20px",
+
                     }}>
                         <div style={{
                             display: 'flex',

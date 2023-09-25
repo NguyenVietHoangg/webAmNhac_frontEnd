@@ -1,24 +1,20 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useMemo, useEffect } from "react"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBagShopping, faBars, faChevronDown, faEnvelope, faPhone, faUser, faHomeAlt } from "@fortawesome/free-solid-svg-icons"
 import { faFacebook, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons"
-
 import classNames from "classnames/bind"
 import styles from "./header.module.scss"
 // import Cookies from 'js-cookie';
 // import { auth } from '../../Views/Pages/config/index'
-
 import { SideSheet, Paragraph, Button } from 'evergreen-ui';
-
 import { faHome, faCloud } from '@fortawesome/free-solid-svg-icons';
 import { Divider, Modal, Popover, Segmented } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Space } from 'antd';
-
 import Cookies from 'js-cookie';
-
+import Lottie from "lottie-react";
+import groovyWalkAnimation from "../../access/animation_lmz2x1gc.json"
 
 const cx = classNames.bind(styles)
 const Header = () => {
@@ -401,17 +397,31 @@ const Header = () => {
 
                 {/* search  */}
                 <div className={cx("header_rigth")}>
-                    <div>
+                    <div style={{
+                        position: 'absolute',
+                        zIndex: 100
+                    }}>
+                        <Lottie animationData={groovyWalkAnimation} style={{
+                            fontSize: '20px',
+                            width: '65px',
+                            marginTop: '-13px',
+                            marginLeft: '-50px'
+
+                        }} />
+
+                    </div>
+                    <div >
                         <input
                             placeholder="Tìm kiếm"
                             style={{
                                 fontSize: '14px',
                                 color: 'black',
                                 border: 'none',
-                                backgroundColor: "#cccccc",
-                                padding: '2px',
+                                backgroundColor: "#eeeeee",
+                                padding: '4px',
                                 opacity: 0.7,
-                                paddingLeft: '10px'
+                                paddingLeft: '10px',
+                                marginTop: '5px'
                                 // borderRadius: '2px'
                             }}
                             onChange={handleInputChange}
@@ -424,7 +434,9 @@ const Header = () => {
                             icon={faHome}
                             style={{
                                 fontSize: "20px",
-                                color: 'rgb(45, 170, 237)'
+                                color: 'rgb(45, 170, 237)',
+                                marginTop: '5px'
+
                             }}
                         />
                     </div>
@@ -432,7 +444,9 @@ const Header = () => {
                         <FontAwesomeIcon icon={faCloud}
                             style={{
                                 fontSize: "20px",
-                                color: 'rgb(45, 170, 237)'
+                                color: 'rgb(45, 170, 237)',
+                                marginTop: '5px'
+
 
                             }}
                         />
