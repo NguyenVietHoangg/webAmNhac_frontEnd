@@ -319,9 +319,9 @@ const Header = () => {
     }
 
     const handleKeyPress = (event) => {
-        if (event.key === 'Enter' && state.inputValue != "") {
+        if (event.key === 'Enter' && state.inputValue != undefined && state.inputValue != "") {
             navigate('/search/' + state.inputValue)
-            setState({ result: `Bạn đã nhấn Enter với giá trị: ${state.inputValue}` });
+            setState(state.inputValue);
         }
     }
 
