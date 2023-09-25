@@ -66,7 +66,6 @@ function LoadMusic() {
 
 
 
-    console.log(fileValue)
 
     // const handleChange = (info) => {
     //     if (info.file.status === 'uploading') {
@@ -229,12 +228,7 @@ function LoadMusic() {
             const cleanedJwtString = token.replace(/^"|"$/g, '');
             const cleanId = id.replace(/^"|"$/g, '');
 
-            console.log({ cleanedJwtString })
-
-            console.log({ name })
-
-
-            if (fileList !== "" && fileValue !== "" && name !== "" && theLoai !== "") {
+            if (fileList[0].length != 0 && fileValue != undefined && name !== "" && theLoai !== "") {
                 const audioUrl = await uploadMP3();
                 const url = await uploadImage()
 
