@@ -25,6 +25,8 @@ function BoxRigth() {
 
     }, [])
 
+    console.log({ apis })
+
     return (
         <div style={{
             paddingLeft: '40px'

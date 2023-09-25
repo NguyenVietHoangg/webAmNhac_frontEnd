@@ -139,14 +139,6 @@ function HomePage() {
         }
     };
 
-    // Example usage:
-
-
-
-
-    // useEffect(() => {
-    //     uploadImage()
-    // }, [])
 
     const [soures, setSoures] = useState("")
 
@@ -177,7 +169,7 @@ function HomePage() {
         Call_Post_Api(
             null, cleanedJwtString, cleanId, '/music/getMusic'
         ).then((data) => {
-            setApi(data.metadata)
+            setApi(data.metadata.slice(0, 5))
         })
 
     }, [])
@@ -196,7 +188,7 @@ function HomePage() {
             <div className={cx("conten")}>
                 <div style={{
                     fontSize: "25px",
-                    marginLeft: "-40px",
+                    marginLeft: "0px",
 
                 }}>
                     <div>
@@ -210,7 +202,6 @@ function HomePage() {
                         <div style={{
                             display: 'flex',
                             justifyContent: 'space-between',
-                            display: 'flex',
                             width: '100%',
                         }}>
                             {apis.map(api => (
@@ -795,6 +786,7 @@ function HomePage() {
 
                 <div style={{
                     display: 'flex',
+
                     // marginTop: '-100px'
                 }}>
                     <BoxRigth />
