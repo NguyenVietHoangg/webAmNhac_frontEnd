@@ -52,7 +52,7 @@ function SingUp() {
                     alert(data.metadata.msg || "Đăng ký thành công!!");
                     setIsLoad(false);
 
-                    if (data.metadata.msg === "Error: Shop đã đc đăng ký!!!") {
+                    if (data.metadata.msg === "Tài khoản đã đc đăng ký!!!") {
                         return;
                     } else if (data.metadata.msg !== "Error: Shop already registered") {
                         window.location = "/login";

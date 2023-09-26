@@ -179,6 +179,12 @@ function Detail() {
 
     const handerDelete = () => {
 
+        Call_Post_Api(
+            {
+                
+            }
+        )
+
     }
 
     return (
