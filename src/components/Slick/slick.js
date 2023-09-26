@@ -13,6 +13,7 @@ import SliderWrapper from "./_SlickSliderStyle";
 function App() {
     return (
         <div className="container">
+
             <Swiper
                 effect={'coverflow'}
                 grabCursor={true}
@@ -33,7 +34,10 @@ function App() {
                 }}
                 modules={[EffectCoverflow, Pagination, Navigation]}
                 className="swiper_container"
+                style={{
+                }}
             >
+
                 <SwiperSlide>
                     <SwiperSlide>
                         <img src="https://avatar-ex-swe.nixcdn.com/slideshow/2023/09/18/c/0/9/a/1695041007228_org.jpg" alt="slide_image" />

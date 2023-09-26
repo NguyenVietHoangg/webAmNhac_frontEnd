@@ -6,6 +6,8 @@ export { default as Detail } from './Pages/Detail/Detail';
 export { default as Search } from './Pages/Search/Search';
 export { default as UsesPage } from './Pages/UserPage/UsesPage';
 export { default as NhacCuaTui } from './Pages/NhacCuaTui/NhacCuaTui';
+export { default as Type } from './Pages/Type/Type';
+
 
 
 

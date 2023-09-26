@@ -3,18 +3,23 @@ import BoxRigth from '../../../components/BoxRight/BoxRigth'
 import { Call_Post_Api } from '../../../CallApis/CallApis'
 import { useParams } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
+import { Spin } from 'antd';
 
 function Search() {
 
     const { keySearch } = useParams();
+    const [isLoad, setIsLoad] = useState(false);
 
     const [apis, setApi] = useState([])
 
     useEffect(() => {
+        setIsLoad(true)
         Call_Post_Api(
             null, null, null, '/music/getSearchName/' + keySearch
         ).then((data) => {
             setApi(data.metadata)
+            setIsLoad(false)
+
         })
     }, [keySearch])
 
@@ -25,6 +30,24 @@ function Search() {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
+            {isLoad &&
+                <div style={{
+                    position: 'fixed',
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    width: '100%',
+                    height: '100vh',
+                    zIndex: 100,
+                    top: 0,
+                    top: 0,
+                    left: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+
+                }}>
+                    <Spin />
+                </div>
+            }
             <div style={{
                 width: '80%',
                 display: 'flex',

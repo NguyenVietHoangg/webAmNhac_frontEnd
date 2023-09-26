@@ -11,7 +11,7 @@ import { Call_Post_Api } from '../../../CallApis/CallApis';
 
 // const authProvider = new firebase.auth.FacebookAuthProvider();
 
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
 
 const cx = classNames.bind(styles);
 
@@ -47,10 +47,10 @@ function Login() {
                 // if (data.metadata.shop.verify == true) {
                 //     alert("Tài khoản đã đăng nhập ở 1 nơi khác!!!")
                 // }
-                if (data.metadata.msg !== 'Authentication error') {
+                if (data.metadata.msg !== 'Authentication error' && data.metadata.status !== "error") {
 
-                    const token = data.metadata.tokens.accessToken
-                    const name = data.metadata.shop.email
+                    const token = data.metadata?.tokens?.accessToken
+                    const name = data.metadata?.shop?.email
 
                     const secretKey = 'my-secret-key';
 
@@ -68,15 +68,17 @@ function Login() {
 
                     // fetch(URL + '/shop/update_verify/' + data.metadata.shop._id, requestOptions)
 
-                    Cookies.set('id', JSON.stringify(data.metadata.shop._id), { expires: 7 });
-                    Cookies.set('timeeexp', JSON.stringify(data.metadata.tokens.timeExp), { expires: 7 });
+                    Cookies.set('id', JSON.stringify(data.metadata?.shop?._id), { expires: 7 });
+                    Cookies.set('timeeexp', JSON.stringify(data.metadata?.tokens?.timeExp), { expires: 7 });
                     setIsLoad(false)
 
                     navigate('/')
 
                 }
                 else {
-                    alert("Sai mật khẩu hoặc tài khoản!!")
+                    // alert("Sai mật khẩu hoặc tài khoản!!")
+                    message.error("Sai mật khẩu hoặc tài khoản!!")
+
                     setIsLoad(false)
 
                 }
@@ -84,7 +86,8 @@ function Login() {
             });
         }
         else {
-            alert("Vui lòng nhập đủ thông tin!!!")
+            // alert("Vui lòng nhập đủ thông tin!!!")
+            message.warning("Vui lòng nhập đủ thông tin!!!")
         }
 
     }

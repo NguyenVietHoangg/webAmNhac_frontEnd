@@ -198,10 +198,10 @@ function HomePage() {
 
                     }}>
                         <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            width: '100%',
-                        }}>
+
+                        }}
+                            className={cx("baihat")}
+                        >
                             {apis.map(api => (
                                 <Link to={`/Detail/${api._id}`} >
                                     <div style={{
@@ -235,13 +235,10 @@ function HomePage() {
                     <div>
                         Nhạc Quốc Tế
                     </div>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        width: '100%',
-                        padding: 10
-                    }}>
+                    <div
+                        className={cx("baihat_test")}
+
+                    >
                         <div style={{
                             marginLeft: '10px'
                         }}>
@@ -274,13 +271,7 @@ function HomePage() {
                     <div>
                         Tâm trạng hôm nay
                     </div>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        width: '100%',
-                        padding: 10
-                    }}
+                    <div className={cx("baihat_test")}
                         data-aos="zoom-out"
                     >
                         <div style={{
@@ -327,13 +318,7 @@ function HomePage() {
                     <div>
                         Tâm trạng hôm nay
                     </div>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        width: '100%',
-                        padding: 10
-                    }}
+                    <div className={cx("baihat_test")}
                         data-aos="fade-up"
                         data-aos-anchor-placement="bottom-bottom"
 
@@ -375,11 +360,7 @@ function HomePage() {
                             <div>
                                 MV HOT
                             </div>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-around'
-                            }}>
+                            <div className={cx("MV_hot")}>
                                 <div>
                                     <div style={{
                                         position: 'relative',
@@ -460,12 +441,7 @@ function HomePage() {
                         </div>
                     </div>
 
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        marginTop: '15px'
-                    }}>
+                    <div className={cx("fake_mvhot")}>
                         <div >
                             <Card width={190} />
                         </div>
@@ -483,12 +459,8 @@ function HomePage() {
                         </div>
                     </div>
 
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        marginTop: '15px'
-                    }}>
+                    <div className={cx("fake_mvhot")}>
+
                         <div >
                             <Card width={190} />
                         </div>
@@ -782,11 +754,7 @@ function HomePage() {
 
 
 
-                <div style={{
-                    display: 'flex',
-
-                    // marginTop: '-100px'
-                }}>
+                <div >
                     <BoxRigth />
                 </div>
             </div >
