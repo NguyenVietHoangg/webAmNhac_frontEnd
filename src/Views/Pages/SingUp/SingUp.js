@@ -33,6 +33,13 @@ function SingUp() {
 
                 return;
             }
+            // Check if the password is at least 6 characters long
+            if (pass.length > 20) {
+                // alert("Mật khẩu phải chứa ít nhất 6 ký tự");
+                message.warning("Mật khẩu quá 20 kí tự!!");
+
+                return;
+            }
 
             // Check if the password and re_Pass match
             if (re_Pass !== pass) {

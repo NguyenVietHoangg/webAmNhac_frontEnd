@@ -47,7 +47,8 @@ function Login() {
                 // if (data.metadata.shop.verify == true) {
                 //     alert("Tài khoản đã đăng nhập ở 1 nơi khác!!!")
                 // }
-                if (data.metadata.msg !== 'Authentication error' && data.metadata.status !== "error") {
+                console.log(data.metadata)
+                if (data.metadata.msg !== 'Sai mật khẩu hoặc tài khoản!!' && data.metadata.status !== "error") {
 
                     const token = data.metadata?.tokens?.accessToken
                     const name = data.metadata?.shop?.email
