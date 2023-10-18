@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './SingUp.module.scss';
 import { Call_Post_Api } from '../../../CallApis/CallApis';
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
 
 const cx = classNames.bind(styles);
 
@@ -20,19 +20,32 @@ function SingUp() {
             // Check if the email is in the correct format
             const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
             if (!emailPattern.test(email)) {
-                alert("Vui lòng nhập một địa chỉ email hợp lệ");
+                // alert("Vui lòng nhập một địa chỉ email hợp lệ");
+                message.warning("Vui lòng nhập một địa chỉ email hợp lệ");
+
                 return;
             }
 
             // Check if the password is at least 6 characters long
             if (pass.length < 6) {
-                alert("Mật khẩu phải chứa ít nhất 6 ký tự");
+                // alert("Mật khẩu phải chứa ít nhất 6 ký tự");
+                message.warning("Mật khẩu phải chứa ít nhất 6 ký tự!!");
+
+                return;
+            }
+            // Check if the password is at least 6 characters long
+            if (pass.length > 20) {
+                // alert("Mật khẩu phải chứa ít nhất 6 ký tự");
+                message.warning("Mật khẩu quá 20 kí tự!!");
+
                 return;
             }
 
             // Check if the password and re_Pass match
             if (re_Pass !== pass) {
-                alert("Mật khẩu và Mật khẩu nhập lại không trùng khớp");
+                // alert("Mật khẩu và Mật khẩu nhập lại không trùng khớp");
+                message.warning("Mật khẩu và Mật khẩu nhập lại không trùng khớp")
+
                 return;
             }
 
@@ -46,7 +59,7 @@ function SingUp() {
                     alert(data.metadata.msg || "Đăng ký thành công!!");
                     setIsLoad(false);
 
-                    if (data.metadata.msg === "Error: Shop đã đc đăng ký!!!") {
+                    if (data.metadata.msg === "Tài khoản đã đc đăng ký!!!") {
                         return;
                     } else if (data.metadata.msg !== "Error: Shop already registered") {
                         window.location = "/login";
@@ -55,7 +68,9 @@ function SingUp() {
                     }
                 });
         } else {
-            alert("Vui lòng nhập đầy đủ thông tin");
+            // alert("Vui lòng nhập đầy đủ thông tin");
+            message.warning("Vui lòng nhập đủ thông tin!!!")
+
         }
     }
 

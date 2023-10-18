@@ -1,6 +1,6 @@
 import {
     HomePage,
-    Login, SingUp, LoadMusic, Detail, Search, UsesPage, NhacCuaTui
+    Login, SingUp, LoadMusic, Detail, Search, UsesPage, NhacCuaTui, Type
 } from "../Views"
 
 
@@ -13,6 +13,8 @@ export const publicRoute = [
     { path: "/Search/:keySearch", component: <Search /> },
     { path: "/UsesPage", component: <UsesPage /> },
     { path: "/NhacCuaTui", component: <NhacCuaTui /> },
+    { path: "/Type/:theloai", component: <Type /> },
+
 
 
 ]

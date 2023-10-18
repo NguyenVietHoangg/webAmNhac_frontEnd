@@ -10,7 +10,7 @@ import styles from "./header.module.scss"
 import { SideSheet, Paragraph, Button } from 'evergreen-ui';
 import { faHome, faCloud } from '@fortawesome/free-solid-svg-icons';
 import { Divider, Modal, Popover, Segmented } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, MenuOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Space } from 'antd';
 import Cookies from 'js-cookie';
 import Lottie from "lottie-react";
@@ -23,6 +23,29 @@ const Header = () => {
 
 
     const text = <span></span>
+
+    const VietNams = [
+        { id: 1, value: " Nhạc Trẻ" },
+        { id: 2, value: " Chữ tình" },
+        { id: 3, value: "  Remix Việt" },
+        { id: 4, value: " Rap Việt" },
+        { id: 5, value: " Tiền Chiến" },
+        { id: 6, value: " Nhạc Trịnh" },
+        { id: 7, value: " Rook Việt" },
+        { id: 8, value: " Cách mạng" },
+    ]
+
+    const AuMys = [
+        { id: 1, value: "Pop" },
+        { id: 2, value: "Rock" },
+        { id: 3, value: "Electronica|Dance" },
+        { id: 4, value: "R&B|HipHop|Rap" },
+        { id: 5, value: "Blues|lazz" },
+        { id: 6, value: "Country" },
+        { id: 7, value: "Latin" },
+        { id: 8, value: "Âu Mỹ Khác" },
+    ]
+
     const content = (
         <div style={{
             width: '500px'
@@ -46,37 +69,18 @@ const Header = () => {
                                 lineHeight: '35px',
                                 marginTop: '10px'
                             }}>
-                                <div className={cx('hover')}>
-                                    Nhạc Trẻ
-                                </div>
-                                <div className={cx('hover')}>
-
-                                    Chữ tình
-                                </div>
-                                <div className={cx('hover')}>
-
-                                    Remix Việt
-                                </div>
-                                <div className={cx('hover')}>
-
-                                    Rap Việt
-                                </div>
-                                <div className={cx('hover')}>
-
-                                    Tiền Chiến
-                                </div>
-                                <div className={cx('hover')}>
-
-                                    Nhạc Trịnh
-                                </div>
-                                <div className={cx('hover')}>
-
-                                    Rook Việt
-                                </div>
-                                <div className={cx('hover')}>
-
-                                    Cách Mạng
-                                </div>
+                                {VietNams.map(VietNam => (
+                                    <Link to={`/type/${VietNam.value}`} style={{
+                                        textDecoration: 'none',
+                                        color: 'black'
+                                    }} >
+                                        <div
+                                            key={VietNam.id}
+                                            className={cx('hover')}>
+                                            {VietNam.value}
+                                        </div>
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                         <div>
@@ -91,31 +95,18 @@ const Header = () => {
                                 lineHeight: '35px',
                                 marginTop: '10px'
                             }}>
-                                <div className={cx('hover')}>
-                                    Pop
-                                </div>
-                                <div className={cx('hover')}>
-
-                                    Rock
-                                </div>
-                                <div className={cx('hover')}>
-                                    Electronica/Dance
-                                </div>
-                                <div className={cx('hover')}>
-                                    R&B/HipHop/Rap
-                                </div>
-                                <div className={cx('hover')}>
-                                    Blues/lazz
-                                </div>
-                                <div className={cx('hover')}>
-                                    Country
-                                </div>
-                                <div className={cx('hover')}>
-                                    Latin
-                                </div>
-                                <div className={cx('hover')}>
-                                    Âu Mỹ Khác
-                                </div>
+                                {AuMys.map(AuMy => (
+                                    <Link to={`/type/${AuMy.value}`} style={{
+                                        textDecoration: 'none',
+                                        color: 'black'
+                                    }} >
+                                        <div
+                                            key={AuMy.id}
+                                            className={cx('hover')}>
+                                            {AuMy.value}
+                                        </div>
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                         <div>
@@ -340,7 +331,16 @@ const Header = () => {
     return (
         <div className={cx('container')}>
             <div className={cx("header")}>
-
+                <MenuOutlined className={cx('menu')} />
+                <div className={cx("lg_fake")}>
+                    <Link to="/" >
+                        <img src="https://stc-id.nixcdn.com/v11/images/header_new/logo_new.png"
+                            style={{
+                                width: '70px'
+                            }}
+                        />
+                    </Link>
+                </div>
                 <div className={cx("header_left")}>
                     <div>
                         <Link to="/" >

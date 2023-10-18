@@ -163,10 +163,11 @@
     .container {
         width: 100%;
         background-color: #F3F6FA;
+        height: 100%;
 
         .box {
             padding-top: 40px;
-            width: 90%;
+            width: 100%;
             height: 100%;
             display: grid;
             grid-template-columns: 100%;
@@ -201,6 +202,7 @@
     .container {
         width: 100%;
         background-color: #F3F6FA;
+        height: 100%;
 
         .box {
             padding-top: 40px;

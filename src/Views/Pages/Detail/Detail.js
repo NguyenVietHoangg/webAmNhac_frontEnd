@@ -45,6 +45,19 @@ function Detail() {
 
     const [isPlaying, setIsPlaying] = useState(false);
 
+    const [userId, setUserId] = useState()
+
+    useEffect(() => {
+        const token = Cookies.get('accessToken');
+        const name = Cookies.get('name');
+        const id = Cookies.get('id');
+        const cleanedJwtString = token?.replace(/^"|"$/g, '');
+        const cleanId = id?.replace(/^"|"$/g, '');
+        const cleanName = name?.replace(/^"|"$/g, '');
+
+        setUserId(cleanId)
+
+    }, [])
 
     //xử lý yêu thihcs
 
@@ -150,7 +163,9 @@ function Detail() {
                 textAlign: 'center',
                 opacity: 0.7,
                 padding: '5px'
-            }}>
+            }}
+                onClick={() => handerDelete()}
+            >
                 Xóa
             </div>
             <div style={{
@@ -161,6 +176,16 @@ function Detail() {
             </div>
         </div>
     )
+
+    const handerDelete = () => {
+
+        Call_Post_Api(
+            {
+                
+            }
+        )
+
+    }
 
     return (
         <div
@@ -364,15 +389,20 @@ function Detail() {
                                     }}>
                                         {comment.updatedAt}
                                     </div>
-                                    <Popover placement="topLeft" title={text} content={content} arrow={mergedArrow}>
-                                        <div style={{
-                                            fontSize: '20px',
-                                            marginLeft: '20px',
+                                    {
+                                        userId == comment.user_id ? (
+                                            <Popover placement="topLeft" title={text} content={content} arrow={mergedArrow}>
+                                                <div style={{
+                                                    fontSize: '20px',
+                                                    marginLeft: '20px',
 
-                                        }}>
-                                            <MoreOutlined />
-                                        </div>
-                                    </Popover>
+                                                }}>
+                                                    <MoreOutlined />
+                                                </div>
+                                            </Popover>
+                                        )
+                                            : null
+                                    }
                                 </div>
 
                             </div>
